@@ -16,8 +16,8 @@ namespace Dowload_image
             public string fileName;
             public ImageDownloader(string remoteUri, string fileName)
             {
-                this.remoteUri = "https://effigis.com/wp-content/uploads/2015/02/Iunctus_SPOT5_5m_8bit_RGB_DRA_torngat_mountains_national_park_8bits_1.jpg";
-                this.fileName = "bigimage.jpg";
+                this.remoteUri = remoteUri;
+                this.fileName = fileName;
             }
 
             public string Download(string remoteUri, string fileName)
