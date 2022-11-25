@@ -11,7 +11,6 @@ namespace Dowload_image
     {
         public class ImageDownloader
         {
-
             public string remoteUri;
             public string fileName;
 
@@ -20,7 +19,6 @@ namespace Dowload_image
                 this.remoteUri = remoteUri;
                 this.fileName = fileName;
             }
-
             public string Download()
             {
                 var myWebClient = new WebClient();
@@ -31,7 +29,6 @@ namespace Dowload_image
             }
 
         }
-
         static void Main(string[] args)
         {
             ImageDownloader imageDownloader = new ImageDownloader();
