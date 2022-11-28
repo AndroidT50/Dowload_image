@@ -9,20 +9,50 @@ namespace Dowload_image
 {
     internal class Program
     {
+        delegate string DowImage(string remoteUrl, string fileName);
         public class ImageDownloader
         {
             public string remoteUri;
             public string fileName;
 
+            public event Action<string> ImageStarted;
+            public event Action<string> ImageCompleted;
+             
+
             public string Download(string remoteUri, string fileName)
             {
               
                 var myWebClient = new WebClient();
-                Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
+                ImageStarted.Invoke("старт");
                 myWebClient.DownloadFile(remoteUri, fileName);
-                Console.WriteLine("Успешно скачал \"{0}\" из \"{1}\"", fileName, remoteUri);
+                ImageCompleted.Invoke("Конец загрузки");
                 return remoteUri;
+               
+               
             }
+            public void IStarted()
+            {
+                ImageStarted += ImageDownloader_ImageStarted;
+               
+            }
+
+            private void ImageDownloader_ImageStarted(string obj)
+            {
+                Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
+            }
+
+            public void ImCompleted()
+            {
+                ImageCompleted += ImageDownloader_ImageCompleted;
+            }
+
+            private void ImageDownloader_ImageCompleted(string obj)
+            {
+                Console.WriteLine("Успешно скачал \"{0}\" из \"{1}\"", fileName, remoteUri);
+            }
+            
+
+
         }
         static void Main(string[] args)
         {
