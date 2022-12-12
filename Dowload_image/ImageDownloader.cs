@@ -13,11 +13,14 @@ namespace Dowload_image
 
         public string Download(string remoteUri, string fileName)
         {
-            var myWebClient = new WebClient();
-            ImageStarted?.Invoke(remoteUri, fileName);
-            myWebClient.DownloadFile(remoteUri, fileName);
-            ImageCompleted?.Invoke(remoteUri, fileName);
-            return remoteUri;
+
+            using (WebClient myWebClient = new WebClient())
+            {
+                ImageStarted?.Invoke(remoteUri, fileName);
+                myWebClient.DownloadFile(remoteUri, fileName);
+                ImageCompleted?.Invoke(remoteUri, fileName);
+                return remoteUri;
+            }
         }
     }
 }
